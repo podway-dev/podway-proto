@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package billing.v1;
+
+option go_package = "github.com/podway-dev/podway-proto/billing/v1;billingv1";
+
+service BillingService {
+  rpc GetOrgPlan(GetOrgPlanRequest) returns (GetOrgPlanResponse);
+}
+
+message GetOrgPlanRequest {
+  string org_id = 1;
+}
+
+message GetOrgPlanResponse {
+  int32 max_databases = 1;
+  double db_storage_gb = 2;
+  int32 max_apps = 3;
+  int32 max_members = 4;
+  int32 max_envs_per_app = 5;
+  int32 cpu_pool_milli = 6;
+  int32 memory_pool_mb = 7;
+}
