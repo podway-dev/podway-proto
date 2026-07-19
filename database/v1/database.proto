@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package database.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/podway-dev/podway-proto/gen/database/v1;databasev1";
+
+service DatabaseService {
+  rpc GetOrgUsage(GetOrgUsageRequest) returns (GetOrgUsageResponse);
+}
+
+message GetOrgUsageRequest {
+  string org_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+message DatabaseUsage {
+  string database_id = 1;
+  int64 storage_bytes = 2;
+  double storage_gb = 3;
+}
+
+message GetOrgUsageResponse {
+  repeated DatabaseUsage databases = 1;
+  int64 total_storage_bytes = 2;
+  double total_storage_gb = 3;
+}
